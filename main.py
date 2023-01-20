@@ -1,12 +1,14 @@
-import time
-from math import e
+from time import time
+
+start_time = time()
 
 def open_file(file_name: str):
-    start = time.time()
-    open("./Files/" + file_name + ".html", "r")
-    finish = time.time()
+    start = time()
+    directory = "D:\Descargas\CS13309_Archivos_HTML" 
+    open(directory + "/Files/" + file_name + ".html", "r")
+    finish = time()
     execution_time = finish - start
-    return "El archivo " + file_name + ".html tardo " + "{:.2f}".format(e**execution_time) + " en abrir."
+    return "El archivo " + file_name + ".html tardo " + "{:.4f}".format(execution_time) + " en abrir."
 
 for i in range(2,504):
     if (i < 10):
@@ -15,3 +17,7 @@ for i in range(2,504):
         print(open_file("0"+str(i)))
     else:
         print(open_file(str(i)))
+
+final_time = time()
+elapsed_time = final_time - start_time
+print("El proceso tardó en ejecutarse " + "{:.2f}".format(elapsed_time) + " segundos")
