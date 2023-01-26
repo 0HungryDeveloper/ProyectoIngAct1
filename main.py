@@ -21,12 +21,7 @@ def open_file(file_name: str):
     sum_total += execution_time
 
 for i in range(2,504):
-    if (i < 10):
-        print(open_file("00"+str(i)))
-    elif(i < 100):
-        print(open_file("0"+str(i)))
-    else:
-        print(open_file(str(i)))
+    print(open_file("%03d" % i))
 
 final_time = time()
 elapsed_time = final_time - start_time
