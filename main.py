@@ -1,5 +1,6 @@
 from time import time
 import logging
+import os
 
 enrollment = 'al02841065.log'
 logging.basicConfig(filename=enrollment, encoding='utf-8', level=logging.INFO)
@@ -9,10 +10,12 @@ sum_total = 0
 def open_file(file_name: str):
     start = time()
     # !Windows version
-    directory = "D:\Descargas\CS13309_Archivos_HTML"
-    open(directory + "/Files/" + file_name + ".html", "r")
-    # !IOS version
-    #open("./Files/" + file_name + ".html", "r")
+    if(os.name == 'nt'):
+        directory = "D:\Descargas\CS13309_Archivos_HTML"
+        open(directory + "/Files/" + file_name + ".html", "r")
+    else:
+        # !IOS version
+        open("./Files/" + file_name + ".html", "r")
     finish = time()
     execution_time = finish - start
     logging.info("El archivo " + file_name + ".html tardo " + "{:.4f}".format(execution_time) + " en abrir.")
