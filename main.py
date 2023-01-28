@@ -1,5 +1,6 @@
 from time import time
 import logging
+import re
 
 enrollment = 'al02841065.log'
 logging.basicConfig(filename=enrollment, encoding='utf-8', level=logging.INFO)
