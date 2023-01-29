@@ -3,9 +3,7 @@ import logging
 import re
 import os
 
-enrollment = 'D:\\Descargas\\al02841065.log' if os.name == 'nt' else 'al02841065.log'
-
-CLEANR = '<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});'
+enrollment = 'D:\\Descargas\\PYTHONLOVERS.log' if os.name == 'nt' else 'PYTHONLOVERS.log'
 
 logging.basicConfig(filename=enrollment, filemode='w' , encoding='utf-8', level=logging.INFO)
 start_time = time()
@@ -16,17 +14,23 @@ def open_file(file_name: str):
     # !Windows version
     if(os.name == 'nt'):
         directory = "D:\Descargas\CS13309_Archivos_HTML"
-        with open(directory + "/Files/" + file_name + ".html", "r", errors='ignore') as file:
-            text_html = file.read()
-            print(remove_html_tags(text_html))
-            print('-------------')
+        with open(directory + "/Files/" + file_name + ".html", "r", errors='ignore') as fileR:
+            text_html = fileR.read()
+            #Quitar el gato de abajo si quieres ver lo que imprime del remove en consola, si no, no
+            #print(remove_html_tags(text_html))
+            with open(directory + "/Files/" + file_name + ".html", "w", errors='ignore') as fileW:
+                fileW.write(remove_html_tags(text_html))
+                #print('-------------')
 
     else:
         # !IOS version
-        with open("./Files/" + file_name + ".html", "r", errors='ignore') as file:
-            text_html = file.read()
-            print(remove_html_tags(text_html))
-            print('------')
+        with open("./Files/" + file_name + ".html", "r", errors='ignore') as fileR:
+            text_html = fileR.read()
+            #Quitar el gato de abajo si quieres ver lo que imprime del remove en consola, si no, no
+            #print(remove_html_tags(text_html))
+            with open("./Files/" + file_name + ".html", "w", errors='ignore') as fileW:
+                fileW.write(remove_html_tags(text_html))
+                #print('------')
 
     finish = time()
     execution_time = finish - start
@@ -36,9 +40,8 @@ def open_file(file_name: str):
     sum_total += execution_time
 
 def remove_html_tags(text):
-    """Remove html tags from a string"""
-    clean = re.compile(CLEANR)
-    return re.sub(clean, '', text)
+    CLEANR = re.compile(r'<[^>]+>')
+    return CLEANR.sub('', text)
 
 for i in range(2,504):
     print(open_file("%03d" % i))
