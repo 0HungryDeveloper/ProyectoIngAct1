@@ -5,6 +5,8 @@ import os
 
 enrollment = 'D:\\Descargas\\al02841065.log' if os.name == 'nt' else 'al02841065.log'
 
+CLEANR = '<.*?>|&([a-z0-9]+|#[0-9]{1,6}|#x[0-9a-f]{1,6});'
+
 logging.basicConfig(filename=enrollment, filemode='w' , encoding='utf-8', level=logging.INFO)
 start_time = time()
 sum_total = 0
@@ -14,13 +16,16 @@ def open_file(file_name: str):
     # !Windows version
     if(os.name == 'nt'):
         directory = "D:\Descargas\CS13309_Archivos_HTML"
-        open(directory + "/Files/" + file_name + ".html", "r")
+        with open(directory + "/Files/" + file_name + ".html", "r", errors='ignore') as file:
+            text_html = file.read()
+            print(remove_html_tags(text_html))
+            print('-------------')
+
     else:
         # !IOS version
-        with open("./Files/" + file_name + ".html", "r") as file:
+        with open("./Files/" + file_name + ".html", "r", errors='ignore') as file:
             text_html = file.read()
-
-            print(strip_tags(text_html))
+            print(remove_html_tags(text_html))
             print('------')
 
     finish = time()
@@ -30,8 +35,10 @@ def open_file(file_name: str):
     global sum_total
     sum_total += execution_time
 
-def strip_tags(value):
-    return re.sub(r'<[^>]*?>', '', value)
+def remove_html_tags(text):
+    """Remove html tags from a string"""
+    clean = re.compile(CLEANR)
+    return re.sub(clean, '', text)
 
 for i in range(2,504):
     print(open_file("%03d" % i))
