@@ -17,13 +17,21 @@ def open_file(file_name: str):
         open(directory + "/Files/" + file_name + ".html", "r")
     else:
         # !IOS version
-        open("./Files/" + file_name + ".html", "r")
+        with open("./Files/" + file_name + ".html", "r") as file:
+            text_html = file.read()
+
+            print(strip_tags(text_html))
+            print('------')
+
     finish = time()
     execution_time = finish - start
     logging.info("El archivo " + file_name + ".html tardo " + "{:.4f}".format(execution_time) + " en abrir.")
     print("El archivo " + file_name + ".html tardo " + "{:.4f}".format(execution_time) + " en abrir.")
     global sum_total
     sum_total += execution_time
+
+def strip_tags(value):
+    return re.sub(r'<[^>]*?>', '', value)
 
 for i in range(2,504):
     print(open_file("%03d" % i))
