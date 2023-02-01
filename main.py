@@ -1,7 +1,7 @@
 from time import time
 import logging
 
-enrollment = 'al02841065.log'
+enrollment = 'PYTHONLOVERS.log'
 logging.basicConfig(filename=enrollment, encoding='utf-8', level=logging.INFO)
 start_time = time()
 sum_total = 0
