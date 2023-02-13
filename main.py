@@ -31,7 +31,7 @@ def open_file(file_name: str):
     # ! Se comienza a correr el tiempo de ejecución de la función.
     start = time()
     
-    file_path = os.path.join(os.getcwd(),'CS13309_Archivos_HTML','Files', file_name + '.html')
+    file_path = os.path.join(os.getcwd(),'Files', file_name + '.html')
 
     # Abrir y leer el archivo, ignoramos cualquier posible error y asignamos un alías.
     with open(file_path, "r", errors='ignore') as fileR:
