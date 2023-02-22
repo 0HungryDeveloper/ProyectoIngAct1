@@ -81,11 +81,12 @@ def find_words(text):
     return words
 
 # * Funcion para buscar y ordenar cada palabra de un texto
-def search_words_and_sort(text):
+def search_words_and_sort(text: str):
     global file_words
-    for found_word in find_words(text):
+    for found_word in find_words(text.lower()):
         if found_word:
             # Si se encuentra una palabra de la funcion find_words la agregamos a la lista cada palabra
+            #//if not found_word in file_words: # Condicion para eliminar palabras duplicadas, aunque esto no es lo que pide la actividad, pero puede servir
             file_words.append(found_word.split()[0])
 
 
