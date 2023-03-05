@@ -115,24 +115,24 @@ def count_words_save(text):
         for word, count in word_count_all.items():
             output_file.write(f"{word}\t{count}\n")
 
-# Se recorre la lista de arhcivos.
-for i in range(2, 504):
-    # Se aplica un formato al string para agregar un cero o dos dependiendo del nombre
-    # del archivo.
-    print(open_file("%03d" % i))
+if __name__ == '__main__':
+    # Se recorre la lista de arhcivos.
+    # for i in range(2, 504):
+    #     # Se aplica un formato al string para agregar un cero o dos dependiendo del nombre
+    #     # del archivo.
+    #     open_file("%03d" % i)
 
-# ! Se termina de ejecutar el programa.
-final_time = time()
-elapsed_time = final_time - start_time
-file_words.sort()
+    open_file("simple")
+    open_file("medium")
+    open_file("hard")
 
-# * Información del tiempo para crear el archivo log
-logging.info(f"El tiempo total de los procesos fue de {sum_total:.4f} segundos")
-print(f"El tiempo total de los procesos fue de  {sum_total:.4f} segundos")
-logging.info(f"El proceso tardó en ejecutarse {elapsed_time:.2f} segundos")
-print(f"El proceso tardó en ejecutarse {elapsed_time:.2f} segundos")
-# print(f"Lista de todas las palabras ordenadas: {str(file_words)}")
-# accepted_file_words_path = os.path.join(os.getcwd(), 'Lista.txt')
-#with open(accepted_file_words_path, "w") as f:
-#    for word in file_words:
-#       f.write(word + '\n')
+    # ! Se termina de ejecutar el programa.
+    final_time = time()
+    elapsed_time = final_time - start_time
+    file_words.sort()
+
+    # * Información del tiempo para crear el archivo log
+    logging.info(f"El tiempo total de los procesos fue de {sum_total:.4f} segundos")
+    print(f"El tiempo total de los procesos fue de  {sum_total:.4f} segundos")
+    logging.info(f"El proceso tardó en ejecutarse {elapsed_time:.2f} segundos")
+    print(f"El proceso tardó en ejecutarse {elapsed_time:.2f} segundos")
