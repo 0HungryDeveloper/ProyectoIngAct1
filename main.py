@@ -41,7 +41,7 @@ def open_file(file_name: str):
 
     # Cuenta las palabras del texto y guardarlas en un diccionario.
     count_words_save(text_without_tags)
-    global  word_count_all
+    global word_count_all
     word_count_all = dict(sorted(word_count_all.items()))
 
     # ! Fin de ejecución de la función.
@@ -51,7 +51,7 @@ def open_file(file_name: str):
     # * Información del tiempo que estará en el archivo log.
     logging.info(f"El archivo {file_name}.html tardo {execution_time:.4f} en abrir.")
     # Imprime por consola la misma información que el archivo log.
-    print(f"El archivo {file_name}.html tardo {execution_time:.4f} en abrir.")
+    # print(f"El archivo {file_name}.html tardo {execution_time:.4f} en abrir.")
 
     # ! Sumar el tiempo que tardan en abrirse todos los archivos.
     global sum_total
@@ -93,12 +93,14 @@ def count_words_save(text):
 
 def count_word_on_file(word_to_count):
     counter = 0
-    files = ['simple.html', 'medium.html', 'hard.html']
+    files = [
+        'simple', 'medium', 'hard'
+    ]
 
     file_path = os.path.join(os.getcwd(), 'CS13309_Archivos_HTML', 'Files') + os.sep
 
     for file in files:
-        with open(file_path + file, 'r', errors='ignore') as fileR:
+        with open(file_path + file + '.html', 'r', errors='ignore') as fileR:
         # Guardamos el resultado en un string para poder leerlo y modificarlo.
             text_html = fileR.read()
 
@@ -118,7 +120,22 @@ def count_word_on_file(word_to_count):
 
     return counter
 
+def clean_html_files():
+
+    file_path = os.path.join(os.getcwd(), 'CS13309_Archivos_HTML', 'Files') + os.sep
+    for i in range(2,504):
+        with open(file_path + "%03d"%i + '.html', 'r', errors='ignore') as fileR:
+        # Guardamos el resultado en un string para poder leerlo y modificarlo.
+            text_html = fileR.read()
+
+        text = remove_html_tags(text_html)
+        text_lower = " ".join(word.lower() for word in text.split())
+
+        with open(file_path + "%03d"%i + '.html', 'w') as file_writer:
+            file_writer.write(text_lower)
+
 if __name__ == '__main__':
+    # clean_html_files()
     # Se recorre la lista de arhcivos.
     for i in range(2, 504):
         # Se aplica un formato al string para agregar un cero o dos dependiendo del nombre
@@ -130,12 +147,12 @@ if __name__ == '__main__':
     open_file('hard')
 
     # ! Se termina de ejecutar el programa.
-    final_time = time()
-    elapsed_time = final_time - start_time
-    file_words.sort()
+    # final_time = time()
+    # elapsed_time = final_time - start_time
+    # file_words.sort()
 
-    # * Información del tiempo para crear el archivo log
-    logging.info(f"El tiempo total de los procesos fue de {sum_total:.4f} segundos")
-    print(f"El tiempo total de los procesos fue de  {sum_total:.4f} segundos")
-    logging.info(f"El proceso tardó en ejecutarse {elapsed_time:.2f} segundos")
-    print(f"El proceso tardó en ejecutarse {elapsed_time:.2f} segundos")
+    # # * Información del tiempo para crear el archivo log
+    # logging.info(f"El tiempo total de los procesos fue de {sum_total:.4f} segundos")
+    # print(f"El tiempo total de los procesos fue de  {sum_total:.4f} segundos")
+    # logging.info(f"El proceso tardó en ejecutarse {elapsed_time:.2f} segundos")
+    # print(f"El proceso tardó en ejecutarse {elapsed_time:.2f} segundos")
